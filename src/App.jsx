@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement } from './features/counter/counterSlice';
+import { increment, decrement } from './reducers/counterSlice';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
-
+import IngredientsContainer from './containers/IngredientsContainer';
 function App() {
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <IngredientsContainer/>
     </>
   );
 }
