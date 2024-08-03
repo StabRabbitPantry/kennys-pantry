@@ -4,9 +4,9 @@ dotenvx.config();
 const apiController = {};
 
 apiController.getRecipes = (req, res, next) => {
-    //console.log(req.query);
-    const testFood = 'potato';
-    const queryString = `https://api.edamam.com/api/recipes/v2?type=public&q=${testFood}&app_id=${process.env.API_ID}&app_key=${process.env.API_KEY}`;
+    //console.log(req.query.ingredient);
+    //const testFood = 'potato';
+    const queryString = `https://api.edamam.com/api/recipes/v2?type=public&q=${req.query.ingredient}&app_id=${process.env.API_ID}&app_key=${process.env.API_KEY}`;
     fetch(queryString)
     .then(data => {
         return data.json();
