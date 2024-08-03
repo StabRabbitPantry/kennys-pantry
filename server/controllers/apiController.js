@@ -12,9 +12,41 @@ apiController.getRecipes = (req, res, next) => {
         return data.json();
     })
     .then(response => {
-        res.locals.recipes = response.hits;
-        console.log(response.hits);
+        const recipeStorage = [];
+        try{
+            for(let element of response.hits){
+                const recipes = {};
+                recipes.recipeName = element.recipe.label;
+                recipes.imageLink = element.recipe.image;
+                recipes.url = element.recipe.url;
+                const ingredients = [];
+                for(let elementIngredient of element.recipe.ingredients){
+                    ingredients.push(elementIngredient.food);
+                }
+                recipes.ingredients = ingredients;
+                recipeStorage.push(recipes);
+            }
+            //console.log(recipeStorage[0]);
+            res.locals.recipeData = recipeStorage;
+            next();
+        }
+        catch (error) {
+            const err = {
+                log: 'apiController.getRecipes parsing error: ' + error,
+                status: 500,
+                message: { err: 'An error occurred' }
+              };
+            next(err);
+        }
     })
+    .catch(error => {
+        const err = {
+            log: 'apiController.getRecipes API fetch error: ' + error,
+            status: 500,
+            message: { err: 'An error occurred' }
+          };
+        next(err);
+    });
 };
 
 export default apiController;
