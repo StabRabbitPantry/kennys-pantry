@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createlist } from '../reducers/recipeListSlice';
-import IngredientChoice from '../components/IngredientChoice';
+import IngredientChoice from '../Components/IngredientChoice';
 
 const IngredientsContainer = () => {
   const [selectedIngredient, setSelectedIngredientState] = useState('');
@@ -40,7 +40,18 @@ const IngredientsContainer = () => {
     getRecipeList();
   };
 
-  const ingredientChoiceList = ['potato', 'egg', 'bacon', 'flour', 'garlic'];
+  const ingredientChoiceList = [
+    'potato',
+    'egg',
+    'bacon',
+    'flour',
+    'garlic',
+    'chicken',
+    'beef',
+    'shrimp',
+    'eggplant',
+    'tofu',
+  ];
 
   return (
     <div
@@ -52,17 +63,22 @@ const IngredientsContainer = () => {
           className='flex flex-col border-4 border-green p-20 rounded-lg shadow-xl'
           style={{ height: 'calc(100vh - 315px)' }}
         >
-          {ingredientChoiceList.map((choice, index) => (
-            <IngredientChoice
-              className='text-brown mb-10 '
-              id={'option' + index}
-              key={index}
-              choice={choice}
-              value={choice}
-              selectedIngredient={selectedIngredient}
-              setSelectedIngredientState={setSelectedIngredientState}
-            />
-          ))}
+          <div
+            className='overflow-y-auto bg-green border-light-green rounded-lg'
+            style={{ maxHeight: '300px' }}
+          >
+            {ingredientChoiceList.map((choice, index) => (
+              <IngredientChoice
+                className='text-brown mb-10 '
+                id={'option' + index}
+                key={index}
+                choice={choice}
+                value={choice}
+                selectedIngredient={selectedIngredient}
+                setSelectedIngredientState={setSelectedIngredientState}
+              />
+            ))}
+          </div>
           <div className='flex-grow'></div>
           <button className='text-xl mt-8' type='submit'>
             Submit
