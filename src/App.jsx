@@ -1,10 +1,17 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { increment, decrement } from './reducers/counterSlice';
+
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
+
+// TEMPERAILY IMPORTED TO TEST FUNCTIONALITY
 import IngredientsContainer from './containers/IngredientsContainer';
+
+
+
 function App() {
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
