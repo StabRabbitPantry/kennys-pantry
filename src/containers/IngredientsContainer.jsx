@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createlist } from '../reducers/recipeListSlice';
-import IngredientChoice from '../components/IngredientChoice';
+import IngredientChoice from '../Components/IngredientChoice';
 
 const IngredientsContainer = () => {
   const [selectedIngredient, setSelectedIngredientState] = useState('');
@@ -40,28 +40,56 @@ const IngredientsContainer = () => {
     getRecipeList();
   };
 
-  const ingredientChoiceList = ['potato', 'egg', 'bacon', 'flour', 'garlic'];
+  const ingredientChoiceList = [
+    'potato',
+    'egg',
+    'bacon',
+    'flour',
+    'garlic',
+    'chicken',
+    'beef',
+    'shrimp',
+    'eggplant',
+    'tofu',
+  ];
 
   return (
     <div
       className='IngredientsContainer absolute bottom-9 left-24 m-6 p-2 text-3xl'
       style={{ left: '135px' }}
     >
-      <form className='flex flex-col justify-between' onSubmit={handleSubmit}>
-        {ingredientChoiceList.map((choice, index) => (
-          <IngredientChoice
-            className='text-gray-400'
-            id={'option' + index}
-            key={index}
-            choice={choice}
-            value={choice}
-            selectedIngredient={selectedIngredient}
-            setSelectedIngredientState={setSelectedIngredientState}
-          />
-        ))}
-        <button className='text-xl' type='submit'>
-          Submit
-        </button>
+      <form className='justify-between' onSubmit={handleSubmit}>
+        <div
+          className='flex flex-col border-4 border-green p-20 rounded-lg shadow-xl'
+          style={{ height: 'calc(100vh - 315px)' }}
+        >
+          <h2
+            className='text-center text-brown text-3xl mb-8 font-bold'
+            style={{ marginTop: '-60px' }}
+          >
+            Ingredients
+          </h2>
+          <div
+            className='overflow-y-auto bg-green border-light-green rounded-lg'
+            style={{ maxHeight: '400px' }}
+          >
+            {ingredientChoiceList.map((choice, index) => (
+              <IngredientChoice
+                className='text-brown mb-10 '
+                id={'option' + index}
+                key={index}
+                choice={choice}
+                value={choice}
+                selectedIngredient={selectedIngredient}
+                setSelectedIngredientState={setSelectedIngredientState}
+              />
+            ))}
+          </div>
+          <div className='flex-grow'></div>
+          <button className='text-xl mt-8' type='submit'>
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
