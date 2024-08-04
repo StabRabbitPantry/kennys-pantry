@@ -47,21 +47,26 @@ const IngredientsContainer = () => {
       className='IngredientsContainer absolute bottom-9 left-24 m-6 p-2 text-3xl'
       style={{ left: '135px' }}
     >
-      <form className='flex flex-col justify-between' onSubmit={handleSubmit}>
-        {ingredientChoiceList.map((choice, index) => (
-          <IngredientChoice
-            className='text-gray-400'
-            id={'option' + index}
-            key={index}
-            choice={choice}
-            value={choice}
-            selectedIngredient={selectedIngredient}
-            setSelectedIngredientState={setSelectedIngredientState}
-          />
-        ))}
-        <button className='text-xl' type='submit'>
-          Submit
-        </button>
+      <form className='justify-between' onSubmit={handleSubmit}>
+        <div
+          className='flex flex-col border-4 border-green p-20 rounded-lg shadow-xl'
+          style={{ height: 'calc(100vh - 315px)' }}
+        >
+          {ingredientChoiceList.map((choice, index) => (
+            <IngredientChoice
+              className='text-gray-400 mb-10'
+              id={'option' + index}
+              key={index}
+              choice={choice}
+              value={choice}
+              selectedIngredient={selectedIngredient}
+              setSelectedIngredientState={setSelectedIngredientState}
+            />
+          ))}
+          <button className='text-xl' type='submit'>
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
