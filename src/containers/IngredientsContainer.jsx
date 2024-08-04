@@ -54,7 +54,7 @@ const IngredientsContainer = () => {
         >
           {ingredientChoiceList.map((choice, index) => (
             <IngredientChoice
-              className='text-gray-400 mb-10'
+              className='text-brown mb-10 '
               id={'option' + index}
               key={index}
               choice={choice}
@@ -63,7 +63,8 @@ const IngredientsContainer = () => {
               setSelectedIngredientState={setSelectedIngredientState}
             />
           ))}
-          <button className='text-xl' type='submit'>
+          <div className='flex-grow'></div>
+          <button className='text-xl mt-8' type='submit'>
             Submit
           </button>
         </div>
