@@ -1,34 +1,64 @@
-import React from 'react';
-import {useSelector, useDispatch} from 'react-redux'
-
-import {create_list} from "../reducers/recipeListSlice"
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createlist } from "../reducers/recipeListSlice";
+import IngredientChoice from '../components/IngredientChoice';
 
 const IngredientsContainer = () => {
+  const [selectedIngredient, setSelectedIngredientState] = useState("");
+  const dispatch = useDispatch();
 
-const dispatch = useDispatch()
+  const getRecipeList = async () => {
+    const URL = `/api/get?ingredient= ${selectedIngredient}`
+    try{
+        const response = await fetch(URL)
+        const recipeList = await response.json()
+        // console.log(recipeList)
+        dispatch(createlist(recipeList));
+        return
+    } catch(error){
+        throw new Error(error)
+    }
+  };
 
-    const getRecipeList = () => {
-        const test = 'potato';
-        fetch('/api/get?ingredient=' + test, {
-            method: 'GET'
-        })
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            
-            const recipeList = data
+//   const getRecipeList = () => {
+    
+//     const URL = `/api/get?ingredient= ${choiceIngredient}`
+    
+//     const response = fetch(URL)
+//     .then(response => {
+//       return response.json();
+//     })
+//     .then(data => {
+//       const recipeList = data;
+//       console.log(recipeList);
+//       dispatch(createlist(data));
+//     });
+//   };
 
-            console.log(recipeList)
-            dispatch(create_list(data));
-        });
-    };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    getRecipeList();
+  };
 
-    return (
-        <div className = 'IngredientsContainer'>
-            <button type="button" onClick={getRecipeList}>Submit</button>
-        </div>
-    )
+  const ingredientChoiceList = ["potato", "egg", "bacon", "flour", "garlic"];
+
+  return (
+    <div className='IngredientsContainer'>
+      <form onSubmit={handleSubmit}>
+        {ingredientChoiceList.map((choice, index) => (
+          <IngredientChoice 
+            id={"option" + index} 
+            key={index}
+            choice={choice}
+            value={choice} 
+            selectedIngredient={selectedIngredient}
+            setSelectedIngredientState={setSelectedIngredientState}
+          />
+        ))}
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
 };
 
 export default IngredientsContainer;
