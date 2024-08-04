@@ -65,7 +65,7 @@ const IngredientsContainer = () => {
         >
           <div
             className='overflow-y-auto bg-green border-light-green rounded-lg'
-            style={{ maxHeight: '300px' }}
+            style={{ maxHeight: '400px' }}
           >
             {ingredientChoiceList.map((choice, index) => (
               <IngredientChoice
