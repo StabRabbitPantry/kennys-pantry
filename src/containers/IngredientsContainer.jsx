@@ -63,6 +63,12 @@ const IngredientsContainer = () => {
           className='flex flex-col border-4 border-green p-20 rounded-lg shadow-xl'
           style={{ height: 'calc(100vh - 315px)' }}
         >
+          <h2
+            className='text-center text-brown text-3xl mb-8 font-bold'
+            style={{ marginTop: '-60px' }}
+          >
+            Ingredients
+          </h2>
           <div
             className='overflow-y-auto bg-green border-light-green rounded-lg'
             style={{ maxHeight: '400px' }}
