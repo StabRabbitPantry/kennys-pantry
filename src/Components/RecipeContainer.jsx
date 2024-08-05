@@ -38,6 +38,7 @@ const RecipeContainer = () => {
           })}
         </div>
         <FullRecipe bool={bool} setBool={setBool} />;{/* </div> */}
+
       </div>
     </div>
   );

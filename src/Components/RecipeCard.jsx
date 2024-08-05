@@ -7,6 +7,7 @@ import '../App.jsx';
 const RecipeCard = ({ pic, bool, setBool, clickHandler, recipe }) => {
   //console.log(recipe.ingredients);
   const organizer = recipe.ingredients.join(', ');
+
   let flag = true;
   let capitalized = '';
   for (let element of organizer) {
@@ -20,6 +21,8 @@ const RecipeCard = ({ pic, bool, setBool, clickHandler, recipe }) => {
       capitalized += element;
     }
   }
+
+
   return (
     <div className=' max-w-xs rounded overflow-hidden shadow-lg flex flex-col bg-green hover:bg-light-green scale-100 h-500px hover:scale-105 '>
       <form onClick={clickHandler} className='cursor-pointer p-4'>
