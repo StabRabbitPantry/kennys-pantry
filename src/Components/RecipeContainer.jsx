@@ -24,7 +24,12 @@ const RecipeContainer = () => {
             setBool={setBool}
             clickHandler={clickHandler}
           />
-          <FullRecipe clickHandler={clickHandler} />;
+          <FullRecipe
+            bool={bool}
+            setBool={setBool}
+            clickHandler={clickHandler}
+          />
+          ;
         </div>
       </div>
     </div>
