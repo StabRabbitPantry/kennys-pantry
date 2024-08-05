@@ -22,7 +22,6 @@ const RecipeCard = ({ clickHandler, recipe }) => {
     }
   }
 
-
   return (
     <div className=' max-w-xs rounded overflow-hidden shadow-lg flex flex-col bg-green hover:bg-light-green scale-100 h-500px hover:scale-105 '>
       <form onClick={clickHandler} className='cursor-pointer p-4'>
@@ -37,8 +36,10 @@ const RecipeCard = ({ clickHandler, recipe }) => {
           style={{ objectFit: 'cover', width: '100%' }}
           alt='A picture of a cake'
         />
-        <h5>Ingredients:</h5>
-        <p>{capitalized}</p>
+        <h5 className='text-dark-maroon font-bowlby-one'>Ingredients:</h5>
+        <p className='text-darker-maroon font-reenie-beanie text-xl font-bold'>
+          {capitalized}
+        </p>
       </form>
     </div>
   );
