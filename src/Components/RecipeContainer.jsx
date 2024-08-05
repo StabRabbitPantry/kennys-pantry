@@ -37,7 +37,8 @@ const RecipeContainer = () => {
             );
           })}
         </div>
-        <FullRecipe clickHandler={clickHandler} />;{/* </div> */}
+        <FullRecipe bool={bool} setBool={setBool} />;{/* </div> */}
+
       </div>
     </div>
   );
