@@ -4,7 +4,7 @@ import '../App.jsx';
 
 // const recipeName = useSelector((state) => state.recipe.name);
 //make recipe card
-const RecipeCard = ({ pic, bool, setBool, clickHandler, recipe }) => {
+const RecipeCard = ({ clickHandler, recipe }) => {
   //console.log(recipe.ingredients);
   const organizer = recipe.ingredients.join(', ');
 

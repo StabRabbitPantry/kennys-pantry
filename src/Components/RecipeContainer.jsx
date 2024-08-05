@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 const RecipeContainer = () => {
-  const [bool, setBool] = useState(false);
-  const clickHandler = () => {
-    setBool(true);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const clickHandler = (recipe) => {
+    setSelectedRecipe(recipe);
   };
   const recipes = useSelector((state) => state.recipeList);
   //console.log(recipes.recipeList[0]);
@@ -30,14 +30,17 @@ const RecipeContainer = () => {
               <RecipeCard
                 key={crypto.randomUUID()}
                 recipe={recipe}
-                bool={bool}
-                setBool={setBool}
-                clickHandler={clickHandler}
+                clickHandler={() => clickHandler(recipe)}
               />
             );
           })}
         </div>
-        <FullRecipe bool={bool} setBool={setBool} />;{/* </div> */}
+        <FullRecipe
+          bool={!!selectedRecipe}
+          setBool={() => setSelectedRecipe(null)}
+          recipe={selectedRecipe}
+        />
+        ;{/* </div> */}
       </div>
     </div>
   );
