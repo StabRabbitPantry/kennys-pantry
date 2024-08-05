@@ -7,9 +7,9 @@ export const recipeListSlice = createSlice({
     recipeList: [],
   },
   reducers: {
-    create_list: (state, payload) => {
-      
-      const recipeList = payload
+    createlist: (state, action) => {
+      // console.log("PAYLOAD: ", action.payload)
+      const recipeList = action.payload
       return {
         ...state,
         recipeList
@@ -18,6 +18,6 @@ export const recipeListSlice = createSlice({
   },
 });
 
-export const { create_list } = recipeListSlice.actions;
+export const { createlist } = recipeListSlice.actions;
 
 export default recipeListSlice.reducer;
