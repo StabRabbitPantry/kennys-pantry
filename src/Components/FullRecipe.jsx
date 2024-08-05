@@ -8,6 +8,7 @@ const FullRecipe = ({ bool, setBool, recipe }) => {
   if (!bool || !recipe) {
     return null;
   }
+  //console.log(recipe.ingredientAmount);
   return (
     <div className='fixed inset-0 flex items-center justify-center bg-gray-800 p-1'>
       <div
@@ -29,7 +30,12 @@ const FullRecipe = ({ bool, setBool, recipe }) => {
         /> */}
         <div className='py-8 text-center'>
           <h3 className='text-dark-maroon text-xl font-bowlby-one dynamic-text w-10/12 mx-auto'>
-            {recipe.url}
+            <div>{recipe.url}</div>
+            <ul>
+            {recipe.ingredientAmount.map((amount, index) => 
+              <li key={index}>{amount}</li>
+            )}
+            </ul>
           </h3>
         </div>
       </div>
