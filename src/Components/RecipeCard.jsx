@@ -7,21 +7,22 @@ import '../App.jsx';
 const RecipeCard = ({ pic, bool, setBool, clickHandler, recipe }) => {
   //console.log(recipe.ingredients);
   const organizer = recipe.ingredients.join(', ');
-    let flag = true;
-    let capitalized = '';
-      for(let element of organizer){
-          if(flag){
-              capitalized += element.toUpperCase();
-              flag = false;
-          }
-          else if(element === ' '){
-            capitalized += element;
-            flag = true;
-          }
-          else{
-              capitalized += element;
-          }
-      }
+
+  let flag = true;
+  let capitalized = '';
+  for (let element of organizer) {
+    if (flag) {
+      capitalized += element.toUpperCase();
+      flag = false;
+    } else if (element === ' ') {
+      capitalized += element;
+      flag = true;
+    } else {
+      capitalized += element;
+    }
+  }
+
+
   return (
     <div className=' max-w-xs rounded overflow-hidden shadow-lg flex flex-col bg-green hover:bg-light-green scale-100 h-500px hover:scale-105 '>
       <form onClick={clickHandler} className='cursor-pointer p-4'>
