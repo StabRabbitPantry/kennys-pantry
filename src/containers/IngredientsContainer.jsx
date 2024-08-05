@@ -96,7 +96,7 @@ const IngredientsContainer = () => {
   return (
     <div
       className='IngredientsContainer absolute bottom-9 left-24 m-6 p-2 text-3xl'
-      style={{ left: '135px' }}
+      style={{ left: '135px', top: '250px' }}
     >
       <form className='justify-between' onSubmit={handleSubmit}>
         <div
