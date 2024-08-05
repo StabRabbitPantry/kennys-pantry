@@ -41,16 +41,56 @@ const IngredientsContainer = () => {
   };
 
   const ingredientChoiceList = [
-    'potato',
-    'egg',
-    'bacon',
-    'flour',
-    'garlic',
-    'chicken',
-    'beef',
-    'shrimp',
-    'eggplant',
-    'tofu',
+    'Almonds',
+    'Apples',
+    'Avocado',
+    'Bananas',
+    'Basil',
+    'Beef',
+    'Bell Peppers',
+    'Black Beans',
+    'Blueberries',
+    'Broccoli',
+    'Butter',
+    'Carrots',
+    'Cauliflower',
+    'Celery',
+    'Cheese',
+    'Chicken',
+    'Cilantro',
+    'Cinnamon',
+    'Corn',
+    'Cucumber',
+    'Eggs',
+    'Garlic',
+    'Ginger',
+    'Honey',
+    'Kale',
+    'Lemon',
+    'Lettuce',
+    'Lime',
+    'Milk',
+    'Mushrooms',
+    'Oats',
+    'Olive Oil',
+    'Onions',
+    'Oranges',
+    'Parsley',
+    'Pasta',
+    'Peanut Butter',
+    'Pineapple',
+    'Potatoes',
+    'Quinoa',
+    'Rice',
+    'Salmon',
+    'Salt',
+    'Spinach',
+    'Strawberries',
+    'Sweet Potatoes',
+    'Tomatoes',
+    'Turkey',
+    'Yogurt',
+    'Zucchini',
   ];
 
   return (
@@ -58,10 +98,7 @@ const IngredientsContainer = () => {
       className='IngredientsContainer absolute bottom-9 left-24 m-6 p-2 text-3xl'
       style={{ left: '135px' }}
     >
-      <form
-        className='justify-between'
-        onSubmit={handleSubmit}
-      >
+      <form className='justify-between' onSubmit={handleSubmit}>
         <div
           className='flex flex-col border-4 border-green p-20 rounded-lg shadow-xl'
           style={{ height: 'calc(100vh - 315px)' }}
@@ -89,10 +126,7 @@ const IngredientsContainer = () => {
             ))}
           </div>
           <div className='flex-grow'></div>
-          <button
-            className='text-xl mt-8'
-            type='submit'
-          >
+          <button className='text-xl mt-8' type='submit'>
             Submit
           </button>
         </div>
