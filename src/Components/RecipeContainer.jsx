@@ -14,7 +14,12 @@ const RecipeContainer = () => {
   return (
     <div
       className='container mx-auto p-4 border-4 border-green rounded-lg bg-opacity-50 shadow-xl'
-      style={{ position: 'relative', top: '213px', minWidth: '900px' }}
+      style={{
+        position: 'relative',
+        top: '250px',
+        minWidth: '900px',
+        left: '100px',
+      }}
       // className='absolute top-20 w-full h-full flex items-center'
       // style={{ left: '550px' }}
     >
