@@ -12,7 +12,7 @@ const IngredientsContainer = () => {
     try {
       const response = await fetch(URL);
       const recipeList = await response.json();
-      console.log(recipeList);
+      //console.log(recipeList);
       dispatch(createlist(recipeList));
       return;
     } catch (error) {
