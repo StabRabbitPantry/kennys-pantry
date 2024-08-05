@@ -58,7 +58,10 @@ const IngredientsContainer = () => {
       className='IngredientsContainer absolute bottom-9 left-24 m-6 p-2 text-3xl'
       style={{ left: '135px' }}
     >
-      <form className='justify-between' onSubmit={handleSubmit}>
+      <form
+        className='justify-between'
+        onSubmit={handleSubmit}
+      >
         <div
           className='flex flex-col border-4 border-green p-20 rounded-lg shadow-xl'
           style={{ height: 'calc(100vh - 315px)' }}
@@ -86,7 +89,10 @@ const IngredientsContainer = () => {
             ))}
           </div>
           <div className='flex-grow'></div>
-          <button className='text-xl mt-8' type='submit'>
+          <button
+            className='text-xl mt-8'
+            type='submit'
+          >
             Submit
           </button>
         </div>
