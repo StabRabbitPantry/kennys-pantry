@@ -15,7 +15,9 @@ const FullRecipe = ({ bool, setBool, recipe }) => {
         className='relative bg-green hover:bg-light-green rounded-lg shadow-lg'
         style={{ width: '800px', height: '500px' }}
       >
-        <h1 className='p-4 text-center'>{recipe.recipeName}</h1>
+        <h1 className='p-4 text-center text-dark-maroon font-bowlby-one '>
+          {recipe.recipeName}
+        </h1>
         <button
           className='absolute top-2 right-2 text-gray-500 hover:text-gray-700 border-none'
           onClick={setBool}
@@ -32,7 +34,7 @@ const FullRecipe = ({ bool, setBool, recipe }) => {
           <h3 className='text-dark-maroon text-xl font-bowlby-one dynamic-text w-10/12 mx-auto'>
             <div>Instructions Link: {recipe.url}</div>
             <br></br>
-            <ul>
+            <ul className='text-dark-maroon text-3xl font-reenie-beanie dynamic-text w-10/12 mx-auto'>
               {recipe.ingredientAmount.map((amount, index) => (
                 <li key={index}>{amount}</li>
               ))}

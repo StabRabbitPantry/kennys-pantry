@@ -104,13 +104,13 @@ const IngredientsContainer = () => {
           style={{ height: 'calc(100vh - 315px)' }}
         >
           <h2
-            className='text-center text-brown text-3xl mb-8 font-bold'
+            className='text-center text-dark-maroon text-3xl mb-8 font-bold font-playfair-display'
             style={{ marginTop: '-60px' }}
           >
             Ingredients
           </h2>
           <div
-            className='overflow-y-auto bg-green border-light-green rounded-lg'
+            className='overflow-y-auto bg-green border-light-green rounded-lg font-reenie-beanie text-4xl'
             style={{ maxHeight: '400px' }}
           >
             {ingredientChoiceList.map((choice, index) => (
@@ -126,7 +126,10 @@ const IngredientsContainer = () => {
             ))}
           </div>
           <div className='flex-grow'></div>
-          <button className='text-xl mt-8' type='submit'>
+          <button
+            className='text-2xl mt-8 text-green font-playfair-display bg-dark-maroon'
+            type='submit'
+          >
             Submit
           </button>
         </div>

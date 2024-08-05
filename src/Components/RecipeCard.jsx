@@ -36,8 +36,10 @@ const RecipeCard = ({ clickHandler, recipe }) => {
           style={{ objectFit: 'cover', width: '100%' }}
           alt='A picture of a cake'
         />
-        <h5 className='text-brown font-bold'>Ingredients:</h5>
-        <p className='text-brown'>{capitalized}</p>
+        <h5 className='text-dark-maroon font-bowlby-one'>Ingredients:</h5>
+        <p className='text-darker-maroon font-reenie-beanie text-xl font-bold'>
+          {capitalized}
+        </p>
       </form>
     </div>
   );
