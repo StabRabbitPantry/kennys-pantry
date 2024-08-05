@@ -18,6 +18,7 @@ export default {
         'reenie-beanie': ['"Reenie Beanie"', 'cursive'],
         holtwood: ['Holtwood One SC', 'serif'],
         'square-peg': ['Square Peg', 'cursive'],
+        'playfair-display': ['Playfair Display', 'serif'],
       },
     },
   },
