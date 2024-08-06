@@ -12,6 +12,7 @@ apiController.getRecipes = (req, res, next) => {
         return data.json();
     })
     .then(response => {
+        //console.log(response.hits[0].recipe.ingredientLines);
         const recipeStorage = [];
         try{
             for(let element of response.hits){
@@ -19,6 +20,7 @@ apiController.getRecipes = (req, res, next) => {
                 recipes.recipeName = element.recipe.label;
                 recipes.imageLink = element.recipe.image;
                 recipes.url = element.recipe.url;
+                recipes.ingredientAmount = element.recipe.ingredientLines;
                 const ingredients = [];
                 for(let elementIngredient of element.recipe.ingredients){
                     ingredients.push(elementIngredient.food);
