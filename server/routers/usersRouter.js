@@ -9,7 +9,7 @@ router.get('/', userController.getUserID, (req, res) => {
 
 //redirect to a homepage;
 router.post('/signup', userController.createUser, (req, res) => {
-  return res.sendStatus(200);
+  return res.status(200).json(res.locals.user);
 })
 
 

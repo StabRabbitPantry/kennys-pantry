@@ -3,7 +3,7 @@ import path from 'path';
 import express from 'express';
 import apiRouter from './routers/apiRouter.js';
 import usersRouter from './routers/usersRouter.js';
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'; 
 const app = express();
 const port = 8080;
 // const mongoose = require('mongoose');

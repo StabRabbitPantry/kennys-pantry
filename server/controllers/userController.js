@@ -10,21 +10,8 @@ const generateAccessToken = (user) => {
     return token;
 }
 
-const jwtAuth = (req, res, next) => {
-    const token = req.header('Authorization').replace('Bearer ', '')
-
-    // Verifies the token sent by client matches the one stored by user
-    try {
-        const decoded = jwt.verify(token, 'secret-key');
-        req.user = decoded;
-        return next();
-    }
-
-    // This catches any errors thrown when trying to verify the JSON Web Token
-    catch (e) {
-        res.status(401).json({ message: "Invalid Token" });
-    }
-}
+// This is the salt constant used for bcrypt hashing
+const SALT = 10;
 
 const userController = {}
 
@@ -38,20 +25,31 @@ const userController = {}
 userController.createUser = (req, res, next) => {
     //destruct req body
     const { username, password } = req.body;
-    User.create({ username, password })
-        .then(user => {
-            //make data persist in res.locals
-            res.locals.user = user;
-            console.log('This is the user object: ', user);
-            return next();
-        })
-        .catch(error => {
-            return next({
-                log: `Error creating user in userController.createUser: ${error}`,
-                status: 500,
-                message: { err: 'Was not able to create new user' }
+
+    // This generates the salt
+    bcrypt.genSalt(SALT, (e, salt) => {
+        if (e) alert(e);
+        // This hashes the password using the generated salt
+        bcrypt.hash(password, salt, (e, hashed_password) => {
+            if (e) alert(e);
+            const favouritesArr = []; 
+            User.create({ username, password: hashed_password , favouritesArr })
+            .then(user => {
+                const jwtToken = generateAccessToken({ id: user._id });
+
+                //make data persist in res.locals
+                res.locals.user = { user, jwtToken };
+                next();
+            })
+            .catch(error => {
+                return next({
+                    log: `Error creating user in userController.createUser: ${error}`,
+                    status: 500,
+                    message: { err: 'Was not able to create new user' }
+                })
             })
         })
+    });
 }
 
 userController.getUserID = (req, res, next) => {
@@ -83,13 +81,19 @@ userController.verifyUser = (req, res, next) => {
     const { username, password } = req.body;
     User.findOne({ username })
         .then(user => {
-            // console.log('verifyUser has found: ', username);
-            // console.log(user);
-            if (user.username !== username || user.password !== password){
-                res.redirect('/login') //
+            if (!password) {
+                return next({ message: 'Missing required field'});
             }
-            res.locals.user = user; 
-            return next();
+            bcrypt.compare(password, user.password, (e, result) => {
+                if (e) return next({ message: 'Error comparing passwords!'});
+                if (result) {
+                    const jwtToken = generateAccessToken({ id: user._id })
+                    res.locals.user = user; 
+                    return next();
+                } else {
+                    return next({ message: 'Invalid Password, try again!'});
+                }
+            })
         })
         .catch(error => {
             return next({
@@ -100,7 +104,29 @@ userController.verifyUser = (req, res, next) => {
             })
         })
 }
- 
+
+ // This function authenticates the user using their JWT
+userController.jwtAuth = (req, res, next) => {
+
+    const token = req.header('Authorization').replace('Bearer ', '');
+
+    // This checks if the user has a JWT
+    if (!token) {
+        return res.status(401).json({ message: "Authentication Required!"})
+    }
+
+    // Verifies the token sent by client exists
+    try {
+        const decoded = jwt.verify(token, 'secret-key');
+        req.user = decoded;
+        return next();
+    }
+
+    // This catches any errors thrown when trying to verify the JSON Web Token
+    catch (e) {
+        return res.status(401).json({ message: "Error: Invalid Token" });
+    }
+}
 
 
 export default userController;

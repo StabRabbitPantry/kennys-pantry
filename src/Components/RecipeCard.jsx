@@ -22,8 +22,32 @@ const RecipeCard = ({ clickHandler, recipe }) => {
     }
   }
 
+
+  const handleSave = async (id) => {
+    // onSave({...currentPAge,title,content});
+    document.getElementById(id).innerHTML="★";
+    await fetch(`/api/users/favorites`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ clickHandler: clickHandler, capitalized: capitalized, recipe : { recipeName: recipe.recipeName, imageLink: recipe.imageLink } })
+    })
+      if(response.ok) {
+        const data = await response.json();
+        console.log('Successful POST', data);
+      }
+    }
+  //     .then(data => {
+      
+  //   // setTimeout(function(){
+  //   //   document.getElementById(id).innerHTML="☆"}, 1000);
+  // }
+  
+  //⭐⭐⭐⭐⭐⭐⭐⭐⭐🌟🌟🌟🌟🌟🌟🌟
   return (
     <div className=' max-w-xs rounded overflow-hidden shadow-lg flex flex-col bg-green hover:bg-light-green scale-100 h-500px hover:scale-105 '>
+      <button className='bg-green hover:bg-light-green self-end text-dark-maroon' onClick={()=>handleSave(recipe.recipeName)} type="button" id={recipe.recipeName}>☆</button>
       <form onClick={clickHandler} className='cursor-pointer p-4'>
         <div className='py-8 text-center'>
           <h3 className='text-dark-maroon text-2xl font-bowlby-one dynamic-text'>
