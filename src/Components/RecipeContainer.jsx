@@ -1,6 +1,6 @@
 import RecipeCard from './RecipeCard';
 import FullRecipe from './FullRecipe';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 const RecipeContainer = () => {

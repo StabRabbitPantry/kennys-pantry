@@ -1,4 +1,5 @@
 import KennysLogo from '../assets/Kennys_Logo.png';
+import React from 'react';
 
 const Logo = () => {
   return (
