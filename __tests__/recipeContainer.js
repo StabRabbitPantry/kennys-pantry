@@ -1,24 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { jest, describe, expect, test } from '@jest/globals';
-import {userEvent} from '@testing-library/user-event';
-import { fireEvent, render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import '@testing-library/jest-dom';
 import RecipeContainer from '../src/Components/RecipeContainer';
 import configureStore from 'redux-mock-store';
-import '@testing-library/jest-dom';
+import { thunk } from 'redux-thunk';
 
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
 
-const initialSTate = {
-    recipeList: {
+// const initialState = {
+//     recipe: {
+//         recipeName: ''
+//         recipeLinkk: [
+//             {recipeName: 'recipe 1', description: 'description 1', ingredients: ["egg", "mayo"], image: 'image1.png'},
+//         ]
+//     }
+// }
+const mockStore = configureStore([thunk]);
+
+jest.mock('crypto.randomUUID', () => ({
+  randomUUID: () => '123456789',
+}));
+
+describe('RecipeContainer', () => {
+  test('rendering', () => {
+    const store = mockStore({
+      recipeList: {
         recipeList: [
-            {label: 'recipe 1', description: 'description 1', ingredients: ["egg", "mayo"], image: 'image1.png'},
-        ]
-    }
-}
-
-
+          { recipeName: 'Recipe 1', description: 'description 1', ingredients: ['egg', 'mayo'] },
+          { recipeName: 'Recipe 2', description: 'description 1', ingredients: ['egg', 'mayo'] },
+        ],
+      },
+    });
+        render(
+            <Provider store={store}>
+                <RecipeContainer />
+            </Provider>
+         )  
+         expect(screen.getByText('Recipe1')).toBeInTheDocument();
+    })
+    
+})
 describe ('RecipeContainer Component Testing', () => {
     const middlewares = [thunk];
     const mockStore = configureStore(middlewares);

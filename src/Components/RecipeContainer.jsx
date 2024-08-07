@@ -9,7 +9,7 @@ const RecipeContainer = () => {
     setSelectedRecipe(recipe);
   };
   const recipes = useSelector((state) => state.recipeList);
-  //console.log(recipes.recipeList[0]);
+  // console.log(recipes.recipeList[0]);
 
   return (
     <div
