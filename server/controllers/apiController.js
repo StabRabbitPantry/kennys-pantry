@@ -4,10 +4,10 @@ dotenvx.config();
 const apiController = {};
 
 apiController.getRecipes = (req, res, next) => {
-    //console.log(req.query.ingredient);
-    //const testFood = 'potato';
-    const queryString2 = `https://api.edamam.com/api/recipes/v2?type=public&q=${req.query.ingredient}&app_id=${process.env.API_ID}&app_key=${process.env.API_KEY}`;
-    const queryString = `https://api.edamam.com/api/recipes/v2?type=public&q=${req.query.ingredient}+Chocolate&app_id=a0f5c6b0&app_key=7085324cb79106e0467bc69332cd3bef`;
+    const ingredients = req.query.ingredient; //this sounds good but we still need to switch buttons select more than one 
+
+    console.log(ingredients);
+    const queryString = `https://api.edamam.com/api/recipes/v2?type=public&q=${ingredients}&app_id=a0f5c6b0&app_key=7085324cb79106e0467bc69332cd3bef`;
     fetch(queryString)
     .then(data => {
         return data.json();
@@ -57,3 +57,4 @@ apiController.getRecipes = (req, res, next) => {
 export default apiController;
 
 
+// GET to http://localhost:8080/api/recipies?ingredients=Apples&ingredients=Almonds&ingredients=Chocolate

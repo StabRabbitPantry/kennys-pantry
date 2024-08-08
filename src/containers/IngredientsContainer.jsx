@@ -4,11 +4,13 @@ import { createlist } from '../reducers/recipeListSlice';
 import IngredientChoice from '../Components/IngredientChoice';
 
 const IngredientsContainer = () => {
-  const [selectedIngredient, setSelectedIngredientState] = useState('');
+  const [selectedIngredient, setSelectedIngredientState] = useState([]);
   const dispatch = useDispatch();
 
   const getRecipeList = async () => {
-    const URL = `/api/get?ingredient= ${selectedIngredient}`;
+    const str = selectedIngredient.join('+');
+    console.log(typeof str, 'this is our str type')
+    const URL = `/api/get?ingredient=${str}`;
     try {
       const response = await fetch(URL);
       const recipeList = await response.json();

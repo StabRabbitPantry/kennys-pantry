@@ -58,13 +58,13 @@ try {
       const data = await response.json();
       // setUsername(data.user);
       console.log('Successful POST', data);
-      console.log(data.user._id, 'this is the user id');
+      // console.log(data.user._id, 'this is the user id');
       const userData = {
         _id: data.user._id,
         username: data.user.username,
         favourites: [], 
       }
-      console.log(userData, "userdata line 67");
+      // console.log(userData, "userdata line 67");
       dispatch(createUser(userData));
       navigate('/home');
     }
@@ -81,7 +81,7 @@ try {
               <input className="border-2 outline-none sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-205
               bg-gray-600 border-gray-500 placeholder-gray-400 text-green" id="Username" placeholder="Username" type="text" onChange={e => setUsername(e.target.value)}></input>
               <input className="border-2 outline-none sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-205
-              bg-gray-600 border-gray-500 placeholder-gray-400 text-green" id="Password" placeholder="Password" type="text" onChange={e => setPassword(e.target.value)}></input>
+              bg-gray-600 border-gray-500 placeholder-gray-400 text-green" id="Password" placeholder="Password" type="password" onChange={e => setPassword(e.target.value)}></input>
               <button type='submit' onClick={handleSubmit}>Signup</button>
               <button onClick={sendHome}>Login</button>
             </form>

@@ -6,26 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 const Favourites = () => {
   const [ userFavourites, setUserFavourites ] = useState([]);
   const user = useSelector((state) => state.user)
-  // console.log(user);
   const id = user._id;
-  console.log(id, 'userID in favourites');
-  const favourites = user.favourites;
-  // console.log(favourites);
-  let renderCards;
 
-// useEffect(()=> {
-// //assume user has favorites arr
-// //if user and written state of userfavorites true
-// fetch(`/api/users/${id}`)
-// .then(res => {
-//   console.log(res, 'res');
-//   console.log(user.favourites)
-// })
-// .catch(err => {
-//     console.log(err);
-// });
-
-// },[]);
   const getUserData = async (id) => {
     try {
       const response = await fetch(`api/users/${id}`, {
@@ -35,23 +17,14 @@ const Favourites = () => {
       })
       if (response.ok) {
         const data = await response.json();
-        renderCards = data.favourites;
-        setUserFavourites((currentArr) => {
-          const cards = [];
-          for (let card of renderCards) {
-            console.log(card);
-            cards.push(<RecipeCard {...card} />);
-          }
-          return cards;
-        })
-        console.log(userFavourites);
         setUserFavourites(data.favourites)
       }
     } catch (error) {
       console.log(error);
     }
   }
-
+  
+  // console.log(userFavourites, 'this is user favourite list');
   useEffect(() => {
     getUserData(id)
   }, [id]);
@@ -66,27 +39,24 @@ const Favourites = () => {
         left: '100px',
       }}
     >
-        <div className='flex flex-col items-center align-middle h-full p-4'> 
+       
             <h1 className='text-7xl font-bold mb-4 text-center text-dark-maroon font-playfair-display'>
             My Favorite Recipes
             </h1>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg: grid-cols-4 gap-4'>
-                {userFavourites.map((favourite,index)=> (
-                    <RecipeCard
-                     key={index} 
-                    recipeName={favourite.recipe}
-                        ingredients={favourite.capitalized}
-                        imageLink={favourite.image}
-                        url={favourite.receipeUrl}
-                        clickHandler={()=> console.log(favourite)}
-                    />
-                )
-                )}
-                {userFavourites} 
+                
+                {userFavourites.map((fav, index) => {
+                  return (<div key={index} className='max-w-xs rounded overflow-hidden shadow-lg flex flex-col bg-green hover:bg-light-green scale-100 h-500px hover:scale-105'>
+                    <h1 className='text-dark-maroon text-2xl font-bowlby-one dynamic-text'>{fav.recipe}</h1>
+                    <img src={fav.image} alt="food-image" className='w-11/12 h-48 my-2 object-cover mx-auto rounded shadow-lg'/>
+                    <h5 className='w-30 text-dark-maroon font-bowlby-one break-words'>{fav.recipeUrl}</h5>
+                    <p className='text-darker-maroon font-reenie-beanie text-xl font-bold'>{fav.ingredients}</p>
+                  </div>)
+                })
+                }
             </div>
         </div>
 
-    </div>
   )
 }
 

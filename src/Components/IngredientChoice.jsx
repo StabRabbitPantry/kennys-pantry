@@ -5,17 +5,22 @@ const IngredientChoice = (props) => {
     props;
 
   const handleChecked = (event) => {
-    setSelectedIngredientState(event.target.value);
+    const ingredient = event.target.value;
+    if (event.target.checked) {
+      setSelectedIngredientState([...selectedIngredient, ingredient])
+    } else {
+      setSelectedIngredientState(selectedIngredient.filter(id => id !== ingredient))
+    }
   };
 
   return (
     <div className={className}>
       <label>
         <input
-          type='radio'
+          type='checkbox'
           value={choice}
           name='ingredientChoice'
-          checked={selectedIngredient === choice}
+          checked={selectedIngredient.includes(choice)}
           onChange={handleChecked}
         />
         {choice}
