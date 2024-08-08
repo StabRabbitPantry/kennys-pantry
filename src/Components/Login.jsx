@@ -1,7 +1,10 @@
 import react, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createUser } from '../reducers/userSlice';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -55,6 +58,14 @@ try {
       const data = await response.json();
       // setUsername(data.user);
       console.log('Successful POST', data);
+      console.log(data._id);
+      const userData = {
+        _id: data._id,
+        username: data.username,
+        favourites: [], 
+      }
+      console.log(userData);
+      dispatch(createUser(userData));
       navigate('/home');
     }
    
