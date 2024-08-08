@@ -15,34 +15,37 @@ const generateAccessToken = (user) => {
 // This is the salt constant used for bcrypt hashing
 const SALT = 10;
 
+// This object will be exported
 const userController = {}
 
-// userController.getUsers = (req, res, next) => {
-//     User.find({}, (err, users) => {
-//         //more logic here:
-//         return next();
-//     });
-// }
-
+// This function creates a new user and stores the username, a hashed password, and an empty array
 userController.createUser = (req, res, next) => {
-    //destruct req body
+
+    // Destructs request body
     const { username, password } = req.body;
 
     // This generates the salt
     bcrypt.genSalt(SALT, (e, salt) => {
         if (e) alert(e);
+
         // This hashes the password using the generated salt
         bcrypt.hash(password, salt, (e, hashed_password) => {
             if (e) alert(e);
-            const favouritesArr = []; 
+            const favouritesArr = [];
+
+            // Attempts to create a new user with hashed password
             User.create({ username, password: hashed_password , favouritesArr })
             .then(user => {
+
+                // Generates a new JSON Web Token 
                 const jwtToken = generateAccessToken({ id: user._id });
 
                 //make data persist in res.locals
                 res.locals.user = { user, jwtToken };
                 next();
             })
+
+            // Catches an error while creating the user
             .catch(error => {
                 return next({
                     log: `Error creating user in userController.createUser: ${error}`,
@@ -54,6 +57,7 @@ userController.createUser = (req, res, next) => {
     });
 }
 
+
 userController.getUserID = async (req, res, next) => {
     const { id } = req.params; // Use req.params for ID in URL
 
@@ -62,8 +66,8 @@ userController.getUserID = async (req, res, next) => {
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
-      res.locals.user = user; // Save user to res.locals
-      return next(); // Proceed to next middleware/route
+      res.locals.user = user; 
+      return next(); 
     } catch (err) {
       return next({
         log: `Error in getUserID: ${err}`,
@@ -85,7 +89,8 @@ userController.verifyUser = (req, res, next) => {
                 if (e) return next({ message: 'Error comparing passwords!'});
                 if (result) {
                     const jwtToken = generateAccessToken({ id: user._id });
-                    res.locals.user = user; 
+                    res.locals.user = { user, jwtToken }; 
+                    // console.log(user.username, user.password)
                     return next();
                 } else {
                     return next({ message: 'Invalid Password, try again!'});
@@ -127,7 +132,7 @@ userController.jwtAuth = (req, res, next) => {
 
 userController.postFave = async (req, res, next) => {
     const { id } = req.params;
-    const { favorites } = req.body;
+    const { card } = req.body;
   
     try {
       const user = await User.findById(id);
@@ -135,7 +140,7 @@ userController.postFave = async (req, res, next) => {
         return res.status(404).json({ message: 'User not found' });
       }
   
-      user.favorites.push(favorites);
+      user.favourites.push(card);
       await user.save();
   
       res.locals.user = user;

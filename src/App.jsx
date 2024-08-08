@@ -11,6 +11,7 @@ import Logo from './Components/Logo.jsx';
 import RecipeContainer from './Components/RecipeContainer.jsx';
 import Login from './Components/Login.jsx';
 import Home from  './Components/Home.jsx';
+import Favourites from "./Components/Favourites.jsx"
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -23,6 +24,7 @@ function App() {
             <Route exact path="/home" element={<Home />}/>
             <Route exact path="/login" element={ <Login /> }/>
             <Route exact path="/signin" element={ <Login /> }/>
+            <Route exact path="/favourites" element={< Favourites/>} />
           </Routes>
   );
 }

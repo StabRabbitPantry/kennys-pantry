@@ -1,12 +1,19 @@
 import react from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const Navbar = () => {
+  const user = useSelector((state) => state.user);
+  const id = user._id;
 
   const navigate = useNavigate();
   
   const goToLogin = () => {
     navigate('/login');
+  }
+  const goToFavourites = () => {
+    navigate(`/favourites`);
   }
 
   return (
@@ -17,7 +24,7 @@ const Navbar = () => {
       >
         Home
       </a>
-      <span className='text-xl'>Favorites</span>
+      <span className='text-xl' onClick={goToFavourites}>Favorites</span>
       {/* <span className='text-xl'>Login</span> */}
       <a
         

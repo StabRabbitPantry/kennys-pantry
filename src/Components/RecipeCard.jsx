@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const RecipeCard = ({ clickHandler, recipe }) => {
+const RecipeCard = ({ clickHandler, recipe, recipeName, imageLink, ingredients }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const id = user._id;
@@ -15,7 +15,6 @@ const RecipeCard = ({ clickHandler, recipe }) => {
           throw new Error('User not found');
         }
         const data = await response.json();
-        console.log(data);
       } catch (err) {
         console.log(err);
       }
@@ -33,7 +32,14 @@ const RecipeCard = ({ clickHandler, recipe }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ favorites: recipe.recipeName }),
+        body: JSON.stringify({ 
+          card : {
+            recipe: recipe.recipeName, 
+            ingredients: capitalized, 
+            image: recipe.imageLink,
+            recipeUrl: recipe.url
+          }
+        }),
       });
       if (!response.ok) {
         throw new Error('Failed to add favourite');
@@ -76,3 +82,6 @@ const RecipeCard = ({ clickHandler, recipe }) => {
 };
 
 export default RecipeCard;
+
+//http://localhost:8080/api/users/favourites/66b4ea017d4e70aae88b5225 << test POST request for DB favourites 
+

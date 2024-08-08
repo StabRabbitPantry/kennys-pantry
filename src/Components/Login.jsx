@@ -58,13 +58,13 @@ try {
       const data = await response.json();
       // setUsername(data.user);
       console.log('Successful POST', data);
-      console.log(data._id);
+      console.log(data.user._id, 'this is the user id');
       const userData = {
-        _id: data._id,
-        username: data.username,
+        _id: data.user._id,
+        username: data.user.username,
         favourites: [], 
       }
-      console.log(userData);
+      console.log(userData, "userdata line 67");
       dispatch(createUser(userData));
       navigate('/home');
     }
