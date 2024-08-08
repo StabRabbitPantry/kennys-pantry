@@ -21,8 +21,7 @@ const Login = () => {
       })
       if (response.ok) {
         const data = await response.json();
-        // setUsername(data.user);
-        console.log('Successful POST', data);
+        localStorage.setItem('jwtToken', data.jwtToken);
         navigate('/login');
       }
       

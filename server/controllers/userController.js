@@ -1,5 +1,5 @@
 // Importing necessary dependencies
-import * as jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import express from 'express';
 import User from '../models/userModel.js';
@@ -87,7 +87,7 @@ userController.verifyUser = (req, res, next) => {
             bcrypt.compare(password, user.password, (e, result) => {
                 if (e) return next({ message: 'Error comparing passwords!'});
                 if (result) {
-                    const jwtToken = generateAccessToken({ id: user._id })
+                    const jwtToken = generateAccessToken({ id: user._id });
                     res.locals.user = user; 
                     return next();
                 } else {
